@@ -1,0 +1,1023 @@
+[
+  {
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "payoutPool",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "reporterRegistry",
+        "type": "address"
+      }
+    ],
+    "name": "ContractsSet",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint8",
+        "name": "version",
+        "type": "uint8"
+      }
+    ],
+    "name": "Initialized",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "newThreshold",
+        "type": "uint256"
+      }
+    ],
+    "name": "KickThresholdChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "bytes",
+        "name": "blsPublicKey",
+        "type": "bytes"
+      }
+    ],
+    "name": "ProposerActivated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "bytes",
+        "name": "blsPublicKey",
+        "type": "bytes"
+      }
+    ],
+    "name": "ProposerExited",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "bytes",
+        "name": "blsPublicKey",
+        "type": "bytes"
+      }
+    ],
+    "name": "ProposerKicked",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "bytes",
+        "name": "blsPublicKey",
+        "type": "bytes"
+      }
+    ],
+    "name": "ProposerOptedIntoPayoutPool",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "bytes",
+        "name": "blsPublicKey",
+        "type": "bytes"
+      }
+    ],
+    "name": "ProposerOptedOutOfPayoutPool",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "bytes",
+        "name": "blsPublicKey",
+        "type": "bytes"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "payoutRecipient",
+        "type": "address"
+      }
+    ],
+    "name": "ProposerPayoutRecipientUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "bytes",
+        "name": "blsPublicKey",
+        "type": "bytes"
+      }
+    ],
+    "name": "ProposerPositionedForRagequit",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "bytes",
+        "name": "blsPublicKey",
+        "type": "bytes"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes",
+        "name": "signature",
+        "type": "bytes"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "payoutRecipient",
+        "type": "address"
+      }
+    ],
+    "name": "ProposerRegistered",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "bytes",
+        "name": "blsPublicKey",
+        "type": "bytes"
+      }
+    ],
+    "name": "ProposerReported",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "signatureSwapper",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "enabled",
+        "type": "bool"
+      }
+    ],
+    "name": "SignatureSwapperPermissionsChanged",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "KICK_THRESHOLD",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "PAYOUT_CYCLE_LENGTH",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "PAYOUT_POOL",
+    "outputs": [
+      {
+        "internalType": "contract PayoutPool",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "REGISTRATION_TYPEHASH",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "REPORTER_REGISTRY",
+    "outputs": [
+      {
+        "internalType": "contract ReporterRegistry",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "activateProposers",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "activeValidators",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "name": "alternativeFeeRecipient",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "name": "blsPublicKeyToProposer",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "activationBlock",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "exitClaimAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "exitBlock",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "payoutRecipient",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "representative",
+        "type": "address"
+      },
+      {
+        "internalType": "enum ProposerRegistry.ProposerStates",
+        "name": "status",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint8",
+        "name": "reportCount",
+        "type": "uint8"
+      },
+      {
+        "internalType": "bool",
+        "name": "openClaim",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes[]",
+        "name": "_blsKeys",
+        "type": "bytes[]"
+      }
+    ],
+    "name": "checkBatchOperationalStatus",
+    "outputs": [
+      {
+        "internalType": "bool[]",
+        "name": "",
+        "type": "bool[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "_blsKey",
+        "type": "bytes"
+      },
+      {
+        "internalType": "address",
+        "name": "_payoutRecipient",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes",
+        "name": "_blsSignature",
+        "type": "bytes"
+      },
+      {
+        "internalType": "address",
+        "name": "_representative",
+        "type": "address"
+      }
+    ],
+    "name": "computeTypedStructHash",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getDomainSeparator",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "_blsPublicKey",
+        "type": "bytes"
+      }
+    ],
+    "name": "getExitClaimAmount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "_blsPublicKey",
+        "type": "bytes"
+      }
+    ],
+    "name": "getProposerAccounts",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getProposerLength",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "_blsPublicKey",
+        "type": "bytes"
+      }
+    ],
+    "name": "getProposerStatus",
+    "outputs": [
+      {
+        "internalType": "uint8",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_start",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_end",
+        "type": "uint256"
+      }
+    ],
+    "name": "getProposers",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "activationBlock",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "exitClaimAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "exitBlock",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "payoutRecipient",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "representative",
+            "type": "address"
+          },
+          {
+            "internalType": "enum ProposerRegistry.ProposerStates",
+            "name": "status",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint8",
+            "name": "reportCount",
+            "type": "uint8"
+          },
+          {
+            "internalType": "bool",
+            "name": "openClaim",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct ProposerRegistry.Proposer[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "historicalActivatedProposers",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_signatureSwapper",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_owner",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_kickThreshold",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_eip712Name",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_eip712Version",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_payoutCycleLength",
+        "type": "uint256"
+      }
+    ],
+    "name": "init",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "_blsPublicKey",
+        "type": "bytes"
+      }
+    ],
+    "name": "isProposerOperational",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "_blsPublicKey",
+        "type": "bytes"
+      }
+    ],
+    "name": "isProposerReportable",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "_blsKey",
+        "type": "bytes"
+      },
+      {
+        "internalType": "address",
+        "name": "_claimer",
+        "type": "address"
+      }
+    ],
+    "name": "isRewardClaimAuthorized",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "isSignatureSwapper",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "_blsPublicKey",
+        "type": "bytes"
+      }
+    ],
+    "name": "kickProposer",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "_blsKey",
+        "type": "bytes"
+      }
+    ],
+    "name": "optIntoPayoutPool",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "_blsPublicKey",
+        "type": "bytes"
+      }
+    ],
+    "name": "positionForRagequit",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "proposers",
+    "outputs": [
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "_blsPublicKey",
+        "type": "bytes"
+      }
+    ],
+    "name": "ragequitProposer",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "_blsKey",
+        "type": "bytes"
+      },
+      {
+        "internalType": "address",
+        "name": "_payoutRecipient",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes",
+        "name": "_blsSignature",
+        "type": "bytes"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint8",
+            "name": "v",
+            "type": "uint8"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "r",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "s",
+            "type": "bytes32"
+          }
+        ],
+        "internalType": "struct ProposerRegistry.SignatureECDSA",
+        "name": "_ecdsaSignature",
+        "type": "tuple"
+      },
+      {
+        "internalType": "bool",
+        "name": "_openClaim",
+        "type": "bool"
+      }
+    ],
+    "name": "registerProposer",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "_blsKey",
+        "type": "bytes"
+      },
+      {
+        "internalType": "address",
+        "name": "_payoutRecipient",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes",
+        "name": "_blsSignature",
+        "type": "bytes"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint8",
+            "name": "v",
+            "type": "uint8"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "r",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "s",
+            "type": "bytes32"
+          }
+        ],
+        "internalType": "struct ProposerRegistry.SignatureECDSA",
+        "name": "_ecdsaSignature",
+        "type": "tuple"
+      },
+      {
+        "internalType": "bool",
+        "name": "_openClaim",
+        "type": "bool"
+      },
+      {
+        "internalType": "address",
+        "name": "_alternativeFeeRecipient",
+        "type": "address"
+      }
+    ],
+    "name": "registerProposerWithoutPayoutPoolRegistration",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "_blsKey",
+        "type": "bytes"
+      }
+    ],
+    "name": "reportProposer",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract PayoutPool",
+        "name": "_payoutPool",
+        "type": "address"
+      },
+      {
+        "internalType": "contract ReporterRegistry",
+        "name": "_reporterRegistry",
+        "type": "address"
+      }
+    ],
+    "name": "setContracts",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_signatureSwapper",
+        "type": "address"
+      },
+      {
+        "internalType": "bool",
+        "name": "_enabled",
+        "type": "bool"
+      }
+    ],
+    "name": "setSignatureSwapper",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_newThreshold",
+        "type": "uint256"
+      }
+    ],
+    "name": "setThreshold",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "_blsKey",
+        "type": "bytes"
+      },
+      {
+        "internalType": "address",
+        "name": "_newPayoutRecipient",
+        "type": "address"
+      }
+    ],
+    "name": "updatePayoutRecipient",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
