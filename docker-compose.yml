@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  scanner:
+    build:
+      context: .
+    container_name: pon-scanner-api
+    image: pon-scanner-api
+    ports:
+      - "127.0.0.1:1212:1212"
